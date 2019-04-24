@@ -4,7 +4,7 @@ import { AppRegistry, SectionList, StyleSheet, Text, View, Alert, Platform } fro
 const apiGetAllTaskLists = 'http://10.0.2.2:3001/todolist/findAll';
 const apiInsertTaskLists = 'http://10.0.2.2:3001/todolist/';
 const apiUpdateTaskLists = 'http://10.0.2.2:3001/todolist/updateLists';
-const apiDeleteTaskLists
+const apiDeleteTaskLists = 'http://10.0.2.2:3001/todoList/deleteListsById/id';
 
 // Get all the data to tasks list
 async function getTasksFromServer() {
@@ -79,10 +79,10 @@ async function updateTaskLists(id, data) {
  * @param id
  * @returns {Promise<Promise<*> | Promise<*>>}
  */
-async function deleteTask(id){
+async function deleteTaskLists(id){
     return new Promise(async(resolve, reject) => {
         try {
-            let response = await fetch(`${apiUpdateTaskLists}/${id}`, {
+            let response = await fetch(`${apiDeleteTaskLists}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -90,9 +90,12 @@ async function deleteTask(id){
                 }
             });
             let responseJson;
+            console.log(response);
             try{
                 responseJson = await response.json();
             } catch(e){
+                console.log("Is erroring.")
+                console.log(e);
                 return reject(e)
             }
             resolve(responseJson);
@@ -107,3 +110,4 @@ async function deleteTask(id){
 export {getTasksFromServer};
 export {insertTasksToServer};
 export {updateTaskLists};
+export {deleteTaskLists};

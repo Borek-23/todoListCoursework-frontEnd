@@ -6,7 +6,7 @@ import Swipeout from 'react-native-swipeout';
 import EditModal from './EditModal';
 import AddModal from './AddModal';
 
-import {getTasksFromServer, updateTaskLists} from "../networking/Server";
+import {deleteTaskLists, getTasksFromServer, updateTaskLists} from "../networking/Server";
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -21,6 +21,10 @@ class FlatListItem extends Component {
     // Will change the state of the flat list item after it's been edited
     refreshFlatListItem = (changedItem) => {
         this.setState({item: changedItem});
+    };
+
+    deleteFlatListItem = () => {
+
     };
 
     render() {
@@ -55,10 +59,8 @@ class FlatListItem extends Component {
                                 { text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                                 {
                                     text: 'Yes', onPress: () => {
-
-                                        deleteTask(this.state.key).then(() => {
-                                            // flatListData.splice(this.props.index, 1);
-                                            //Refresh FlatList !
+                                        deleteTaskLists(this.props.item._id)
+                                            .then(() => {
                                             this.props.parentFlatList.refreshFlatList(deletingRow);
                                         }).catch((error) => {
                                             console.log(`error = ${error}`);
@@ -219,7 +221,7 @@ export default class BasicFlatList extends Component {
                             </FlatListItem>);
                     }}
                     // This will make a Task List name as a key
-                    keyExtractor={(item, index) => item.name} // item.name
+                    keyExtractor={(item, index) => item._id} // item.name
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
