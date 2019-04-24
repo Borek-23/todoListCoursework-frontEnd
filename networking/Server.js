@@ -33,7 +33,7 @@ async function insertTasksToServer(params) {
             });
             let responseJson;
             try{
-                console.log(response)
+                console.log(response);
                 responseJson = await response.json();
                 resolve(responseJson);
             } catch(err) {
@@ -94,7 +94,7 @@ async function deleteTaskLists(id){
             try{
                 responseJson = await response.json();
             } catch(e){
-                console.log("Is erroring.")
+                console.log("Is erroring.");
                 console.log(e);
                 return reject(e)
             }

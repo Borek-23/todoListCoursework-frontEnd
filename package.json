@@ -7,13 +7,20 @@
     "test": "jest"
   },
   "dependencies": {
+    "merge-options": "^1.0.1",
     "modal-box": "^3.0.1",
+    "mustache": "^3.0.1",
     "random-string": "^0.2.0",
-    "react": "16.8.3",
+    "react": "^16.8.6",
+    "react-art": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-native": "^0.59.6",
     "react-native-button": "^2.3.0",
+    "react-native-gesture-handler": "^1.1.0",
     "react-native-modalbox": "^1.7.1",
     "react-native-swipeout": "^2.3.6",
+    "react-native-web": "^0.11.2",
+    "react-navigation": "^3.9.0",
     "swipeout": "^1.0.0"
   },
   "devDependencies": {

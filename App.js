@@ -14,6 +14,8 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>To-Do List Manager</Text>
+
                 <View style={{
                     flex: 1,
                     justifyContent: 'space-around'
@@ -42,7 +44,7 @@ export default class App extends Component {
                 </View>
 
                 <View style={styles.container}>
-                    <Button title={'Go to your To-Do Lists'} onPress={this._storeData}/>
+                    <Button title={'Go to your To-Do Lists'} onPress={() => {this.props.navigation}}/>
                 </View>
             </View>
         );
