@@ -3,7 +3,7 @@ import { AppRegistry, SectionList, StyleSheet, Text, View, Alert, Platform } fro
 
 const apiGetAllTaskLists = 'http://10.0.2.2:3001/todolist/findAll';
 const apiInsertTaskLists = 'http://10.0.2.2:3001/todolist/';
-const apiUpdateTaskLists = 'http://10.0.2.2:3001/todolist//updateLists/';
+const apiUpdateTaskLists = 'http://10.0.2.2:3001/todolist/updateLists/';
 
 // Get all the data to tasks list
 async function getTasksFromServer() {
