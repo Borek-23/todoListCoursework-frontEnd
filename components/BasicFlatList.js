@@ -6,7 +6,7 @@ import Swipeout from 'react-native-swipeout';
 import EditModal from './EditModal';
 import AddModal from './AddModal';
 
-import {getTasksFromServer} from "../networking/Server";
+import {getTasksFromServer, updateTaskLists} from "../networking/Server";
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -55,9 +55,16 @@ class FlatListItem extends Component {
                                 { text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                                 {
                                     text: 'Yes', onPress: () => {
-                                        // flatListData.splice(this.props.index, 1);
-                                        //Refresh FlatList !
-                                        this.props.parentFlatList.refreshFlatList(deletingRow);
+
+                                        deleteTask(this.state.key).then(() => {
+                                            // flatListData.splice(this.props.index, 1);
+                                            //Refresh FlatList !
+                                            this.props.parentFlatList.refreshFlatList(deletingRow);
+                                        }).catch((error) => {
+                                            console.log(`error = ${error}`);
+                                            alert("Failed to remove task from the API.");
+                                        });
+
                                     }
                                 },
                             ],

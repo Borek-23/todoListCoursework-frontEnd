@@ -131,14 +131,13 @@ export default class EditModal extends Component {
                             alert("New Task List has to have at least a Name and one or more Tasks");
                             return;
                         }
-                        let params = {
-                            taskListId: this.state.key,
+                        let data = {
                             name: this.state.taskListName,
                             description: this.state.taskListDescription,
-                            tasks: this.state.tasks,
+                            tasks: this.state.tasks.split(","),
                         };
                         // Update existing Tasks Lists
-                        updateTaskLists(params).then(() => {
+                        updateTaskLists(this.state.key, data).then(() => {
                             // console.log(`this.state.flatlistItem = ${this.state.flatlistItem}`);
                             this.state.flatlistItem.refreshFlatListItem({
                                 _id: this.state.key,

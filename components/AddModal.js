@@ -119,7 +119,7 @@ export default class AddModal extends Component {
                         const newTaskList = {
                             name: this.state.newTaskListName,
                             description: this.state.newTaskListDescription,
-                            tasks: this.state.newTasks.split(" "),
+                            tasks: this.state.newTasks.split(","),
                         };
                         insertTasksToServer(newTaskList).then(() => {
                             this.props.parentFlatList.refreshDataFromServer();
