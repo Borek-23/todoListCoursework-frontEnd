@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {AsyncStorage} from 'react-native';
+import BasicFlatList from "./components/BasicFlatList";
+import {createSwitchNavigator, createAppContainer} from "react-navigation";
+
 
 export default class App extends Component {
     constructor(props) {
@@ -44,7 +47,7 @@ export default class App extends Component {
                 </View>
 
                 <View style={styles.container}>
-                    <Button title={'Go to your To-Do Lists'} onPress={() => {this.props.navigation}}/>
+                    <Button title={'Go to your To-Do Lists'} onPress={() => this.props.BasicFlatList}/>
                 </View>
             </View>
         );
@@ -73,6 +76,13 @@ export default class App extends Component {
     };
 }
 
+// const AppSwitchNavigator = createSwitchNavigator({
+//     Home: {screen: App},
+//     Todos: {screen: BasicFlatList}
+// });
+//
+// const AppContainer = createAppContainer(AppSwitchNavigator);
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -86,3 +96,6 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     },
 });
+
+// export {AppContainer};
+// export {App};

@@ -16,6 +16,7 @@
     "react-dom": "^16.8.6",
     "react-native": "^0.59.6",
     "react-native-button": "^2.3.0",
+    "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-modalbox": "^1.7.1",
     "react-native-swipeout": "^2.3.6",

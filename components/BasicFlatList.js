@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableHighlight, RefreshControl} from 'react-native';
-// import flatListData from '../data/flatListData';
 import Swipeout from 'react-native-swipeout';
 
 import EditModal from './EditModal';
 import AddModal from './AddModal';
 
 import {deleteTaskLists, getTasksFromServer, updateTaskLists} from "../networking/Server";
+import {App, AppContainer} from "../App";
 
 class FlatListItem extends Component {
     constructor(props) {
@@ -21,10 +21,6 @@ class FlatListItem extends Component {
     // Will change the state of the flat list item after it's been edited
     refreshFlatListItem = (changedItem) => {
         this.setState({item: changedItem});
-    };
-
-    deleteFlatListItem = () => {
-
     };
 
     render() {
@@ -211,7 +207,6 @@ export default class BasicFlatList extends Component {
 
                 <FlatList
                     ref={"flatList"}
-                    // data={flatListData}
                     data={this.state.tasksFromServer}
                     renderItem={({item, index})=>{
                         //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
