@@ -8,6 +8,9 @@ import AddModal from './AddModal';
 import {deleteTaskLists, getTasksFromServer, updateTaskLists} from "../networking/Server";
 import {App, AppContainer} from "../App";
 
+import { NativeModules } from 'react-native'
+const {ToastModule} = NativeModules;
+
 class FlatListItem extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +45,7 @@ class FlatListItem extends Component {
                         // Here need to change the state and re-render the component
                         let selectedItem = this.state.item.name ? this.state.item : this.props.item;
                         this.props.parentFlatList.refs.editModal.showEditModal(selectedItem, this);
+                        ToastModule.showText()
                     },
                     text: 'Edit', type: 'primary'
                 },
@@ -58,6 +62,7 @@ class FlatListItem extends Component {
                                         deleteTaskLists(this.props.item._id)
                                             .then(() => {
                                             this.props.parentFlatList.refreshFlatList(deletingRow);
+                                            ToastModule.showText(`Task List Deleted!`, ToastModule.LENGTH_SHORT)
                                         }).catch((error) => {
                                             console.log(`error = ${error}`);
                                             alert("Failed to remove task from the API.");
@@ -86,19 +91,17 @@ class FlatListItem extends Component {
                         flex: 1,
                         flexDirection:'row',
                         // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'
-                        backgroundColor: 'mediumseagreen'
+                        backgroundColor: '#2f4f4f'
                     }}>
                         <View style={{
                             flex: 1,
                             flexDirection:'column',
                         }}>
                             {/* Defining data to be displayed inside the flat list */}
-                            <Text style={styles.flatListItem}>{this.state.item.name ? this.state.item.name : this.props.item.name}</Text>
-                            <Text style={styles.flatListItem}>{this.state.item.description ? this.state.item.description : this.props.item.description}</Text>
-                            <Text style={styles.flatListItem}>Tasks:{'\n'}{this.state.item.tasks ? this.state.item.tasks.join('\n') : this.props.item.tasks.join('\n')}</Text>
-                            <Text style={styles.flatListItem}>{this.state.item.listCreatedOn ? this.state.item.listCreatedOn : this.props.item.listCreatedOn}</Text>
-                            <Text style={styles.flatListItem}>{this.state.item.status ? this.state.item.status : this.props.item.status}</Text>
-                            <Text style={styles.flatListItem}>{this.props.item._id}</Text>
+                            <Text style={styles.flatListItem}>List Name:{'\n'}{this.state.item.name ? this.state.item.name : this.props.item.name}</Text>
+                            <Text style={styles.flatListItem}>List Description:{'\n'}{this.state.item.description ? this.state.item.description : this.props.item.description}</Text>
+                            <Text style={styles.flatListItem}>Tasks:{'\n'}{this.state.item.tasks ? this.state.item.tasks : this.props.item.tasks.join('\n')}</Text>
+                            <Text style={styles.flatListItem}>Created On:{'\n'}{this.state.item.listCreatedOn ? this.state.item.listCreatedOn : this.props.item.listCreatedOn}</Text>
                         </View>
 
                         {/*<Image*/}
@@ -123,14 +126,18 @@ class FlatListItem extends Component {
 
 const styles = StyleSheet.create({
     flatListItem: {
-        color: 'black',
+        color: '#f0fff0',
         padding: 5,
         fontSize: 16,
     },
     todoSign: {
-        color: 'yellow',
-        padding: 10,
-        fontSize: 32,
+        fontSize: 26,
+        fontStyle: 'italic',
+        color: 'teal',
+        textAlign: 'center',
+        textShadowColor: '#708090',
+        textShadowRadius: 4,
+        padding: 10
     }
 });
 
@@ -184,17 +191,17 @@ export default class BasicFlatList extends Component {
         return (
             <View style={{flex: 1, marginTop: Platform.OS === 'android' ? 0 : 34}}>
                 <View style={{
-                    backgroundColor: 'tomato',
+                    backgroundColor: '#ffebcd',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    height: 65
+                    height: 60
                 }}>
-                    <Text style={styles.todoSign}>Todo List</Text>
+                    <Text style={styles.todoSign}>To-Do List Manager</Text>
 
                     <TouchableHighlight
                         style={{marginRight: 10}}
-                        underlayColor = 'tomato'
+                        underlayColor = '#ffebcd'
                         onPress={this._onPressAdd}
                     >
 

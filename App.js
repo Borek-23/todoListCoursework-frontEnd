@@ -17,7 +17,7 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>To-Do List Manager</Text>
+                <Text style={styles.mainHeading}>To-Do List Manager</Text>
 
                 <View style={{
                     flex: 1,
@@ -95,6 +95,16 @@ const styles = StyleSheet.create({
         padding: 25,
         borderColor: 'black'
     },
+    mainHeading: {
+        fontSize: 26,
+        fontStyle: 'italic',
+        color: 'teal',
+        textAlign: 'center',
+        textShadowColor: '#708090',
+        textShadowRadius: 4,
+        flexWrap: 'wrap',
+        padding: 5
+    }
 });
 
 // export {AppContainer};

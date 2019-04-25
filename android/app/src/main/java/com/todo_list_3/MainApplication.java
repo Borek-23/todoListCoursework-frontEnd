@@ -21,8 +21,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+      //Add ToastPackage to here !
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+              new MainReactPackage(), new ToastPackage()
       );
     }
 

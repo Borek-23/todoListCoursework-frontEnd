@@ -163,13 +163,4 @@ export default class EditModal extends Component {
 }
 
 
-// var foundIndex = flatListData.findIndex(item => this.state.key === item.key);
-// if (foundIndex < 0) {
-//     return;
-// }
-// flatListData[foundIndex].name = this.state.taskListName;
-// flatListData[foundIndex].description = this.state.taskListDescription;
-// flatListData[foundIndex].tasks = this.state.tasks;
-
-
 

@@ -9,6 +9,10 @@ import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
 import {insertTasksToServer} from "../networking/Server";
 
+import { NativeModules } from 'react-native'
+const {ToastModule} = NativeModules;
+
+
 let screen = Dimensions.get('window');
 
 export default class AddModal extends Component {
@@ -123,6 +127,7 @@ export default class AddModal extends Component {
                         };
                         insertTasksToServer(newTaskList).then(() => {
                             this.props.parentFlatList.refreshDataFromServer();
+                            ToastModule.showText(`Task List Added!`, ToastModule.LENGTH_LONG)
                         });
                         this.refs.myModal.close();
                     }}
