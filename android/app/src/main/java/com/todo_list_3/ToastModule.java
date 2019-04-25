@@ -29,7 +29,6 @@ public class ToastModule extends ReactContextBaseJavaModule{
     @Override
     public Map<String, Object> getConstants() {
         final Map<String, Object> constants = new HashMap<>();
-        constants.put("PI", "3.1416");
         constants.put(LENGTH_SHORT, Toast.LENGTH_SHORT);
         constants.put(LENGTH_LONG, Toast.LENGTH_LONG);
         return constants;

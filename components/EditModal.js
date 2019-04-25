@@ -1,13 +1,13 @@
 // Modal is where I can have a pop-up window in which I can type
 import React, {Component} from 'react';
 import {
-    AppRegistry, FlatList, StyleSheet, Text, View,
-    Image, Alert, Platform, TouchableHighlight,
-    Dimensions, TextInput
+    Text, Platform, Dimensions, TextInput
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
 import {apiUpdateTaskLists, updateTaskLists} from "../networking/Server";
+import { NativeModules } from 'react-native'
+const {ToastModule} = NativeModules;
 
 
 let screen = Dimensions.get('window');
@@ -24,9 +24,7 @@ export default class EditModal extends Component {
     }
 
     showEditModal = (editingTasks, flatListItem) => {
-        // console.log(`editingFood = ${JSON.stringify(editingTasks)}`);
         this.setState({
-            // key: editingTasks.key,
             key: editingTasks._id,
             taskListName: editingTasks.name,
             taskListDescription: editingTasks.description,
@@ -35,10 +33,6 @@ export default class EditModal extends Component {
         });
         this.refs.myModal.open();
     };
-
-    // generateKey = (numberOfCharacters) => {
-    //     return require('random-string')({numberOfCharacters});
-    // };
 
     render() {
         return (
@@ -54,7 +48,6 @@ export default class EditModal extends Component {
                 position='center'
                 backdrop={true}
                 onClosed={() => {
-                    // alert("Modal Closed");
                 }}
             >
 
@@ -138,7 +131,6 @@ export default class EditModal extends Component {
                         };
                         // Update existing Tasks Lists
                         updateTaskLists(this.state.key, data).then(() => {
-                            // console.log(`this.state.flatlistItem = ${this.state.flatlistItem}`);
                             this.state.flatlistItem.refreshFlatListItem({
                                 _id: this.state.key,
                                 name: this.state.taskListName,
@@ -150,9 +142,7 @@ export default class EditModal extends Component {
                             console.log(`error = ${error}`);
                             this.refs.myModal.close();
                         });
-                        // Refresh flatList item
-                        // this.state.flatListItem.refreshFlatListItem();
-                        // this.refs.myModal.close();
+                        ToastModule.showText(`List Edited. Scroll down to update!`, ToastModule.LENGTH_LONG)
                     }}
                 >
                     Save List

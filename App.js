@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {AsyncStorage} from 'react-native';
-import BasicFlatList from "./components/BasicFlatList";
-import {createSwitchNavigator, createAppContainer} from "react-navigation";
 
+import { NativeModules } from 'react-native'
+const {ToastModule} = NativeModules;
 
 export default class App extends Component {
     constructor(props) {
@@ -57,7 +57,7 @@ export default class App extends Component {
     _storeData = async () => {
         try {
             await AsyncStorage.setItem('quickNote', `${this.state.quickNote}`);
-            alert('Note Saved');
+            ToastModule.showText(`Quick Note Saved`, ToastModule.LENGTH_LONG)
         } catch (error) {
             console.error(error);
         }
@@ -75,13 +75,6 @@ export default class App extends Component {
         }
     };
 }
-
-// const AppSwitchNavigator = createSwitchNavigator({
-//     Home: {screen: App},
-//     Todos: {screen: BasicFlatList}
-// });
-//
-// const AppContainer = createAppContainer(AppSwitchNavigator);
 
 const styles = StyleSheet.create({
     container: {
@@ -106,6 +99,3 @@ const styles = StyleSheet.create({
         padding: 5
     }
 });
-
-// export {AppContainer};
-// export {App};

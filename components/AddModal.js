@@ -1,8 +1,7 @@
 // Modal is where I can have a pop-up window in which I can type
 import React, {Component} from 'react';
 import {
-    AppRegistry, FlatList, StyleSheet, Text, View,
-    Image, Alert, Platform, TouchableHighlight,
+    Text, Platform,
     Dimensions, TextInput
 } from 'react-native';
 import Modal from 'react-native-modalbox';
@@ -43,7 +42,6 @@ export default class AddModal extends Component {
                 position='center'
                 backdrop={true}
                 onClosed={() => {
-                    // alert("Modal Closed");
                 }}
             >
 
@@ -127,7 +125,7 @@ export default class AddModal extends Component {
                         };
                         insertTasksToServer(newTaskList).then(() => {
                             this.props.parentFlatList.refreshDataFromServer();
-                            ToastModule.showText(`Task List Added!`, ToastModule.LENGTH_LONG)
+                            ToastModule.showText(`To-Do List Added!`, ToastModule.LENGTH_SHORT)
                         });
                         this.refs.myModal.close();
                     }}

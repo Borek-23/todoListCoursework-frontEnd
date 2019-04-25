@@ -40,12 +40,9 @@ class FlatListItem extends Component {
             right: [
                 {
                     onPress: () => {
-                        // alert("Update");
-                        // this.props.parentFlatList.refs.editModal.showEditModal(flatListData[this.props.index], this);
                         // Here need to change the state and re-render the component
                         let selectedItem = this.state.item.name ? this.state.item : this.props.item;
                         this.props.parentFlatList.refs.editModal.showEditModal(selectedItem, this);
-                        ToastModule.showText()
                     },
                     text: 'Edit', type: 'primary'
                 },
@@ -62,7 +59,7 @@ class FlatListItem extends Component {
                                         deleteTaskLists(this.props.item._id)
                                             .then(() => {
                                             this.props.parentFlatList.refreshFlatList(deletingRow);
-                                            ToastModule.showText(`Task List Deleted!`, ToastModule.LENGTH_SHORT)
+                                            ToastModule.showText(`To-Do List Deleted!`, ToastModule.LENGTH_SHORT)
                                         }).catch((error) => {
                                             console.log(`error = ${error}`);
                                             alert("Failed to remove task from the API.");
@@ -90,7 +87,6 @@ class FlatListItem extends Component {
                     <View style={{
                         flex: 1,
                         flexDirection:'row',
-                        // backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen': 'tomato'
                         backgroundColor: '#2f4f4f'
                     }}>
                         <View style={{
@@ -103,13 +99,6 @@ class FlatListItem extends Component {
                             <Text style={styles.flatListItem}>Tasks:{'\n'}{this.state.item.tasks ? this.state.item.tasks : this.props.item.tasks.join('\n')}</Text>
                             <Text style={styles.flatListItem}>Created On:{'\n'}{this.state.item.listCreatedOn ? this.state.item.listCreatedOn : this.props.item.listCreatedOn}</Text>
                         </View>
-
-                        {/*<Image*/}
-                        {/*    source={{uri: this.props.item.imageURL}}*/}
-                        {/*    style={{width: 100, height: 100, margin: 5}}*/}
-                        {/*>*/}
-
-                        {/*</Image>*/}
 
                     </View>
                     <View style={{
@@ -216,7 +205,6 @@ export default class BasicFlatList extends Component {
                     ref={"flatList"}
                     data={this.state.tasksFromServer}
                     renderItem={({item, index})=>{
-                        //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
                         return (
                             <FlatListItem item={item} index={index} parentFlatList={this}>
 
