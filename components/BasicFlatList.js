@@ -142,7 +142,9 @@ class FlatListItem extends Component {
     }
 }
 
-// Defining styles for ease of use
+/**
+ * Styles Declaration
+ * */
 const styles = StyleSheet.create({
     flatListItem: {
         color: '#f0fff0',
@@ -160,7 +162,9 @@ const styles = StyleSheet.create({
     }
 });
 
-// Default class export, this will get run and rendered
+/**
+ * Default class export, this will get rendered
+ * */
 export default class BasicFlatList extends Component {
     // Constructor initialising state
     constructor(props) {
