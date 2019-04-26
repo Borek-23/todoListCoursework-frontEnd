@@ -97,7 +97,7 @@ export default class AddModal extends Component {
                     }}
                     // This is function called when a user types in text
                     onChangeText={(text) => this.setState({newTasks: text})}
-                    placeholder="Enter new Task(s) separated by Spaces"
+                    placeholder="Enter new Task(s) separated by Commas"
                     value={this.state.newTasks} // this.state.newTasks
                 />
 
