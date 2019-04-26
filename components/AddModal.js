@@ -14,7 +14,7 @@ import {insertTasksToServer} from "../networking/Server";
 import { NativeModules } from 'react-native'
 const {ToastModule} = NativeModules;
 
-// Dinamically get the dimensions of the screen to render the modal box window
+// Dynamically get the dimensions of the screen to render the modal box window
 let screen = Dimensions.get('window');
 
 /**
@@ -36,10 +36,10 @@ export default class AddModal extends Component {
         this.refs.myModal.open();
     };
 
-    // rendering on screen
+    // Rendering on screen
     render() {
         return (
-            // The position and shape of the pop-up modal box
+            // The position and shape of the pop-up modal box - corner radius depending on platform
             <Modal
                 ref={"myModal"}
                 style={{
@@ -150,7 +150,7 @@ export default class AddModal extends Component {
                         insertTasksToServer(newTaskList).then(() => {
                             // Refresh data in the database (MongoDB)
                             this.props.parentFlatList.refreshDataFromServer();
-                            // Show native toast message to infrom user that task list was added successfully
+                            // Show native toast message to inform user that task list was added successfully
                             ToastModule.showText(`To-Do List Added!`, ToastModule.LENGTH_SHORT)
                         });
                         // Close modal box after button was pressed

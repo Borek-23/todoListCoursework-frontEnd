@@ -106,7 +106,7 @@ async function deleteTaskLists(id){
 }
 
 
-// Make this function public
+// Make these functions public
 export {getTasksFromServer};
 export {insertTasksToServer};
 export {updateTaskLists};
