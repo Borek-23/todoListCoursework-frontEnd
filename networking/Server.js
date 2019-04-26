@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { AppRegistry, SectionList, StyleSheet, Text, View, Alert, Platform } from 'react-native';
 
+// Set all the addresses to be constants - abstraction to not having to modify the code when API changes
 const apiGetAllTaskLists = 'http://10.0.2.2:3001/todolist/findAll';
 const apiInsertTaskLists = 'http://10.0.2.2:3001/todolist/';
 const apiUpdateTaskLists = 'http://10.0.2.2:3001/todolist/updateLists';
 const apiDeleteTaskLists = 'http://10.0.2.2:3001/todoList/deleteListsById/id';
 
-// Get all the data to tasks list
+/**
+ * Fetch all the task lists
+ */
+// Send GET request to insert new data, not specified as GET request is default
 async function getTasksFromServer() {
     try {
+        // Using fetch method with api address as a parameter
         let response = await fetch(apiGetAllTaskLists);
         let responseJson = await response.json();
         return responseJson.payload; // data is list of all task lists
@@ -17,12 +21,18 @@ async function getTasksFromServer() {
     }
 }
 
-// Post request to insert new data into database
+/**
+ * Insert a task list
+ */
+// Send POST request to insert new data
 async function insertTasksToServer(params) {
+    // Return new promise to handle response and errors
     return new Promise(async (resolve, reject) => {
         try {
             console.log(params);
+            // Using fetch method with api address as one parameter and object setting as next
             let response = await fetch(apiInsertTaskLists, {
+                // specify method as POST
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -34,7 +44,9 @@ async function insertTasksToServer(params) {
             let responseJson;
             try{
                 console.log(response);
+                // Wait for response to come back
                 responseJson = await response.json();
+                // Returned JSON object
                 resolve(responseJson);
             } catch(err) {
                 console.log(err);
@@ -47,20 +59,28 @@ async function insertTasksToServer(params) {
     })
 }
 
+/**
+ * Update a task list
+ */
 // Send PUT request to update data
 async function updateTaskLists(id, data) {
+    // Return new promise to handle response and errors
     return new Promise(async (resolve, reject) => {
         try {
+            // Using fetch method with api address as one parameter and object setting as next - append item id to the address
             let response = await fetch(`${apiUpdateTaskLists}/${id}`, {
+                // specify method as PUT
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
+                // Body MUST be a string
                 body: JSON.stringify(data)
             });
             let responseJson;
             try{
+                // Wait for response
                 responseJson = await response.json();
                 console.log(responseJson)
             } catch(e){
@@ -75,11 +95,11 @@ async function updateTaskLists(id, data) {
 }
 
 /**
- * Delete a task
- * @param id
- * @returns {Promise<Promise<*> | Promise<*>>}
+ * Delete a task list
  */
+// Send DELETE request to delete data
 async function deleteTaskLists(id){
+    // Return new promise to handle response and errors
     return new Promise(async(resolve, reject) => {
         try {
             let response = await fetch(`${apiDeleteTaskLists}/${id}`, {
@@ -104,7 +124,6 @@ async function deleteTaskLists(id){
         }
     })
 }
-
 
 // Make these functions public
 export {getTasksFromServer};
