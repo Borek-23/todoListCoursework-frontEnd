@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {AsyncStorage} from 'react-native';
+import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 // Importing Native toast module from java files
 import { NativeModules } from 'react-native'
+import BasicFlatList from "./components/BasicFlatList";
 const {ToastModule} = NativeModules;
 
 /**
  * Default class export, this is the component
  * */
-export default class App extends Component {
+class App extends Component { // export default
     // Declaring constructor to initialise the state props
     constructor(props) {
         super(props);
@@ -62,7 +64,17 @@ export default class App extends Component {
 
                 {/* Will navigate to To-Do lists screen */}
                 <View style={styles.container}>
-                    <Button title={'Go to your To-Do Lists'} onPress={() => this.props.BasicFlatList}/>
+                    <Button
+                        title={'Go to your To-Do Lists'}
+                        onPress={() => {
+                            this.props.navigation.dispatch(StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({ routeName: 'Lists' })
+                                ],
+                            }))
+                        }}
+                    />
                 </View>
             </View>
         );
@@ -92,6 +104,19 @@ export default class App extends Component {
         }
     };
 }
+
+const AppNavigator = createStackNavigator({
+    Home: {
+        screen: App,
+    },
+    Lists: {
+        screen: BasicFlatList,
+    },
+}, {
+    initialRouteName: 'Home',
+});
+
+export default createAppContainer(AppNavigator);
 
 /**
  * Styles Declaration
