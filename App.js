@@ -23,6 +23,8 @@ class App extends Component { // export default
 
     // Rendering on screen
     render() {
+        console.disableYellowBox = true;
+
         return (
             // Root View component
             <View style={styles.container}>

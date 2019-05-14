@@ -150,7 +150,7 @@ export default class EditModal extends Component {
                         let data = {
                             name: this.state.taskListName,
                             description: this.state.taskListDescription,
-                            tasks: this.state.tasks.split(","),
+                            tasks: this.state.tasks.toString().split(","),
                         };
                         // Update existing Tasks Lists
                         updateTaskLists(this.state.key, data).then(() => {
